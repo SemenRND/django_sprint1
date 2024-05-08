@@ -46,8 +46,8 @@ posts = [
 ]
 
 # Создаем словарь с постами, где ключ - 'id', а значение - сам пост
-
 posts_: Dict[int, Any] = {post['id']: post for post in posts}
+
 
 def index(request):
     context = {'post': posts[::-1]}
