@@ -1,5 +1,5 @@
 from django.shortcuts import render
-
+from typing import Dict, Any
 from django.http import Http404
 
 posts = [
@@ -46,8 +46,8 @@ posts = [
 ]
 
 # Создаем словарь с постами, где ключ - 'id', а значение - сам пост
-posts_dict = {post['id']: post for post in posts}
 
+posts_: Dict[int, Any] = {post['id']: post for post in posts}
 
 def index(request):
     context = {'post': posts[::-1]}
@@ -56,7 +56,7 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    post = posts_dict.get(post_id)
+    post = posts_.get(post_id)
     if not post:
         raise Http404('Пост не найден')
     context = {'post': post}
