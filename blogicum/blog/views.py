@@ -59,10 +59,8 @@ def post_detail(request, post_id):
     # Проверка наличия ключа в словаре
     if post_id not in posts_:
         raise Http404('Пост не найден')
-    
     # Получение значения через []
     post = posts_[post_id]
-    
     context = {'post': post}
     template = 'blog/detail.html'
     return render(request, template, context)
