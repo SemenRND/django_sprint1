@@ -1,6 +1,7 @@
-from django.shortcuts import render
-from typing import Dict, Any
-from django.http import Http404
+from django.shortcuts import render 
+from typing import Dict, Any 
+from django.http import Http404 
+
 
 posts = [
     {
@@ -46,7 +47,7 @@ posts = [
 ]
 
 # Создаем словарь с постами, где ключ - 'id', а значение - сам пост
-posts_: Dict[int, Any] = {post['id']: post for post in posts}
+posts_: dict[int, object] = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -56,9 +57,13 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    post = posts_.get(post_id)
-    if not post:
+    # Проверка наличия ключа в словаре
+    if post_id not in posts_:
         raise Http404('Пост не найден')
+    
+    # Получение значения через []
+    post = posts_[post_id]
+    
     context = {'post': post}
     template = 'blog/detail.html'
     return render(request, template, context)
