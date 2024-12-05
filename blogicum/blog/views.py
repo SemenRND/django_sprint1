@@ -1,5 +1,4 @@
 from django.shortcuts import render 
-from typing import Dict, Any 
 from django.http import Http404 
 
 
