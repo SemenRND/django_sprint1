@@ -1,7 +1,7 @@
 import re
 
-import pytest # type: ignore
-from pytest_django.asserts import assertTemplateUsed # type: ignore
+import pytest
+from pytest_django.asserts import assertTemplateUsed
 
 from tests.conftest import try_get_url
 
