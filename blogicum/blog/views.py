@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from django.http import Http404 
-
+from typing import Dict, Any
+from django.http import Http404
 
 posts = [
     {
@@ -46,7 +46,7 @@ posts = [
 ]
 
 # Создаем словарь с постами, где ключ - 'id', а значение - сам пост
-posts_: dict[int, object] = {post['id']: post for post in posts}
+posts_: Dict[int, Any] = {post['id']: post for post in posts}
 
 
 def index(request):
@@ -56,10 +56,12 @@ def index(request):
 
 
 def post_detail(request, post_id):
-    if post_id not in posts_:
-        raise KeyError(f"Post with ID {post_id} does not exist.")
-    post = posts_[post_id]
-    return post
+    post = posts_.get(post_id)
+    if not post:
+        raise Http404('Пост не найден')
+    context = {'post': post}
+    template = 'blog/detail.html'
+    return render(request, template, context)
 
 
 def category_posts(request, category_slug):
