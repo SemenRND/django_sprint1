@@ -20,7 +20,7 @@
       </ul>
   <!-- Первые 10 слов -->
       <p>
-      {{ element.text|truncatewords:10 }}
+        {{ element.text|truncatewords:10|linebreaksbr }}
       </p>
         <a href="{% url 'blog:post_detail' element.id %}">Читать полный текст</a>
     </article>
